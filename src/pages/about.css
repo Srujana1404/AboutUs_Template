@@ -1,0 +1,369 @@
+/* Background and Animation Styling */
+.background {
+    position: fixed;
+    /* Changed to fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Ensure it's at the back */
+}
+
+.rhombus {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(100, 55, 192, 0.8);
+    transform: rotate(45deg);
+    animation: moveRhombus 5s linear infinite;
+    opacity: 0.7;
+}
+
+.rhombus:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.rhombus:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.rhombus:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.rhombus:nth-child(4) {
+    left: 50%;
+    animation-delay: 3s;
+}
+
+.rhombus:nth-child(5) {
+    left: 70%;
+    animation-delay: 4s;
+}
+
+.rhombus:nth-child(6) {
+    left: 85%;
+    animation-delay: 5s;
+}
+
+@keyframes moveRhombus {
+    0% {
+        transform: translateY(100vh) rotate(45deg);
+    }
+
+    100% {
+        transform: translateY(-50vh) rotate(405deg);
+    }
+}
+
+/* Container and Grid Layout */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    z-index: 1;
+    /* Ensure content is above background */
+    position: relative;
+}
+
+.description {
+    margin: 20px 0;
+    font-size: 1.2em;
+    color: #6c757d;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 50px;
+    padding: 40px 0;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #3c0b74;
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(93, 76, 185, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.7s ease;
+    background-color: #ffffff;
+}
+
+.card img {
+    height: 280px;
+    /* Larger image for the Chairman */
+    width: 280px;
+    border-radius: 100%;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    
+}
+
+.card h2 {
+    color: #007bff;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+.card h3 {
+    color: #495057;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.card p {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin: 10px 0;
+    padding: 0 15px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 25px rgba(144, 173, 28, 0.3);
+}
+
+.team-grid.faculty {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    gap: 50px;
+    padding: 40px 0;
+}
+
+/* For smaller screens, one card per row */
+@media (max-width: 768px) {
+    .team-grid.faculty {
+        grid-template-columns: 1fr; /* One card per row */
+        gap: 30px;
+        padding: 30px 0;
+    }
+}
+
+/* For large screens, three cards per row */
+@media (min-width: 1200px) {
+    .team-grid.faculty {
+        grid-template-columns: repeat(2, 1fr); /* Three cards per row */
+        gap: 50px;
+        padding: 40px 0;
+    }
+}
+
+.faculty-card {
+    border: 3px solid #0c1d5e;
+    background: linear-gradient(135deg, #ffffff);
+    /* No grid-column span, so each card fits within one column */
+}
+
+
+
+
+
+/* Styling and Animation for Chairman's Card */
+.chairman-card,
+.principal-card,
+.dean-card,
+.hod-card {
+    grid-column: span 3;
+    /* Makes the Chairman's card take up the entire row */
+    padding: 30px;
+    border: 3px solid #0c1d5e;
+    background: linear-gradient(135deg, #ffffff);
+    animation: glow 3s ease-in-out infinite;
+    position: relative;
+}
+
+.chairman-card img,
+.principal-card img,
+.dean-card img,
+.hod-card img {
+    height: 300px;
+    /* Larger image for the Chairman */
+    width: 300px;
+    border-radius: 100%;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+}
+
+/* Pulsating ring effect */
+.chairman-card::before,
+.principal-card::before,
+.dean-card::before,
+.hod-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 330px;
+    /* Slightly larger than image */
+    height: 330px;
+    /* Slightly larger than image */
+    background: rgba(204, 193, 180, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: pulsate 2s infinite ease-in-out;
+}
+
+/* Keyframes for the glow animation */
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(204, 193, 180, 0.8), 0 0 20px rgba(255, 174, 66, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgb(24, 35, 126), 0 0 30px rgba(255, 174, 66, 0.8);
+    }
+}
+
+/* Keyframes for the pulsating ring animation */
+@keyframes pulsate {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: #d8294c;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #669623;
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    color: #333; /* Adjust color as needed */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #d111b8, #b53486);
+    -webkit-background-clip: text; /* For Chrome, Safari */
+    -moz-background-clip: text;    /* For Firefox */
+    -o-background-clip: text;      /* For Opera */
+    background-clip: text;         /* Standard */
+    color: transparent;
+    padding: 10px;
+    transition: all 0.3s ease;     /* Smooth transition effect */
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 5px;
+    background-color: #3eb579;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0;                    /* Hidden by default */
+    transition: opacity 0.6s ease, width 0.9s ease;
+}
+
+h1:hover::after {
+    opacity: 1;                    /* Show on hover */
+    width: 100px;                  /* Increase underline width on hover */
+}
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    color: #333; /* Adjust color as needed */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #0840ea, #16182d);
+    -webkit-background-clip: text; /* For Chrome, Safari */
+    -moz-background-clip: text;    /* For Firefox */
+    -o-background-clip: text;      /* For Opera */
+    background-clip: text;         /* Standard */
+    color: transparent;
+    padding: 10px;
+    transition: all 0.3s ease;     /* Smooth transition effect */
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 300px;
+    height: 5px;
+    background-color: #f1e609;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0;                    /* Hidden by default */
+    transition: opacity 0.6s ease, width 0.9s ease;
+}
+
+h2:hover::after {
+    opacity: 1;                    /* Show on hover */
+    width: 200px;                  /* Increase underline width on hover */
+}
+
+
+h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8em;
+    color: #a33535; /* Adjust color as needed */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #15a0b8, #960b8b);
+    -webkit-background-clip: text; /* For Chrome, Safari */
+    -moz-background-clip: text;    /* For Firefox */
+    -o-background-clip: text;      /* For Opera */
+    background-clip: text;         /* Standard */
+    color: transparent;
+    padding: 10px;
+    transition: all 0.3s ease;     /* Smooth transition effect */
+}
+
+h3::after {
+    content: '';
+    display: block;
+    width: 400px;
+    height: 5px;
+    background-color: #ea813b;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0;                    /* Hidden by default */
+    transition: opacity 0.6s ease, width 0.9s ease;
+}
+
+h3:hover::after {
+    opacity: 1;                    /* Show on hover */
+    width: 300px;                  /* Increase underline width on hover */
+}
