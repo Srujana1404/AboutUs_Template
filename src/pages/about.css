@@ -32,22 +32,22 @@
 
 .rhombus:nth-child(3) {
     left: 30%;
-    animation-delay: 2s;
+    animation-delay: 3s;
 }
 
 .rhombus:nth-child(4) {
     left: 50%;
-    animation-delay: 3s;
+    animation-delay: 4s;
 }
 
 .rhombus:nth-child(5) {
     left: 70%;
-    animation-delay: 4s;
+    animation-delay: 2s;
 }
 
 .rhombus:nth-child(6) {
     left: 85%;
-    animation-delay: 5s;
+    animation-delay: 4s;
 }
 
 @keyframes moveRhombus {
@@ -67,7 +67,6 @@
     padding: 20px;
     text-align: center;
     z-index: 1;
-    /* Ensure content is above background */
     position: relative;
 }
 
@@ -340,7 +339,7 @@ h2::after {
 h3::after {
     content: '';
     display: block;
-    width: 500px;
+    width: 400px;
     height: 5px;
     background-color: #3eb579;
     margin: 10px auto 0;
@@ -361,9 +360,8 @@ h2.scroll-up::after {
 
 h3.scroll-up::after {
     opacity: 1;
-    width: 400px;
+    width: 300px;
 }
-
 
 @keyframes floatRightToLeft {
     0% {
@@ -381,46 +379,124 @@ h3.scroll-up::after {
     }
 }
 
+.co-developer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
 .co-developer-card {
-    animation: floatRightToLeft 2s ease-in-out forwards;
+    animation: floatRightToLeft 4s ease-in-out forwards;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     background-color: #fff;
     padding: 15px;
-    
     width: 300px;
-    height: 300px;
+    height: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: absolute; /* Positioning for animation */
     transition: opacity 0.5s ease;
-    animation: floatRightToLeft 2s ease-in-out forwards; /* Animation for individual cards */
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .co-developer-card {
+        width: 90%;
+        max-width: 300px;
+        margin-bottom: 20px;
+        animation: none; /* Stop animation on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .co-developer-card {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+        animation: none; /* Stop animation on small screens */
+    }
+}
+
+.co-developer-card img {
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
 }
 
 
-.co-developer-enter {
-    opacity: 1; /* Fully visible when entering */
-    transform: translateX(100%); /* Start from the right */
-  }
-  
-  .co-developer-exit {
-    opacity: 1; /* Fully visible before exiting */
-    transform: translateX(-100%); /* Move to the left */
-  }
-  
-  .co-developer-visible {
-    opacity: 1; /* Visible card */
-    transform: translateX(0); /* Centered */
-  }
 
-  .co-developers {
+/* Toggle Switch Container */
+.theme-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide the default checkbox */
+.theme-toggle-container input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Toggle Switch Background */
+.theme-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-off-color);
+    transition: background-color 0.4s;
+    border-radius: 34px;
+}
+
+/* Sun and Moon Icons */
+.theme-toggle-slider:before {
+    position: absolute;
+    content: "🌞";  /* Default to sun icon */
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--toggle-circle-bg);
+    transition: transform 0.4s, content 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px var(--toggle-circle-shadow);
     display: flex;
-    justify-content: center; /* Center cards horizontally */
-    align-items: center; /* Center cards vertically */
-    overflow: hidden; /* Prevent overflow */
-    width: 100%; /* Full width */
-    position: relative; /* Positioning for animations */
-    height: 400px; /* Adjust height as needed */
-  }
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; /* Adjust icon size */
+}
+
+/* Moon Icon when dark mode is enabled */
+input:checked + .theme-toggle-slider:before {
+    content: "🌜"; /* Moon icon when toggled */
+    transform: translateX(26px);
+}
+
+/* Toggle On State (background color for the slider) */
+input:checked + .theme-toggle-slider {
+    background-color: var(--toggle-on-color);
+}
+
+/* Optional: Adding focus for accessibility */
+input:focus + .theme-toggle-slider {
+    box-shadow: 0 0 1px var(--toggle-on-color);
+}

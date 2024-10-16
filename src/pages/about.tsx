@@ -26,17 +26,17 @@ const AboutUs: React.FC = () => {
   ];
 
   const studentTeam: TeamMember[] = [
-    { name: "Srujana", role: "Student Team", description: "Supporting details for Student 1", imageUrl: "https://i.pinimg.com/236x/50/f2/bf/50f2bfb30271fd805ee0defc019fbb0e.jpg" },
+    { name: "Arya", role: "Student Team", description: "Supporting details for Student 1", imageUrl: "https://i.pinimg.com/236x/50/f2/bf/50f2bfb30271fd805ee0defc019fbb0e.jpg" },
     { name: "Student 2", role: "Student Team", description: "Supporting details for Student 2", imageUrl: "https://i.pinimg.com/736x/d7/d6/23/d7d6239a87be9b8205331526a8d04c49.jpg" },
     { name: "Student 3", role: "Student Team", description: "Supporting details for Student 3", imageUrl: "https://img.freepik.com/premium-photo/3d-illustration-young-man-with-brown-coat-brown-jacket_1022026-51465.jpg" },
     { name: "Student 4", role: "Student Team", description: "Supporting details for Student 4", imageUrl: "https://i.pinimg.com/736x/89/47/25/894725066789852bd95216d2f011034d.jpg" }
   ];
 
   const coDevelopers: TeamMember[] = [
-    { name: "Co-Developer 1", role: "Co-Developer", description: "Supporting details for Co-Developer 1", imageUrl: "https://example.com/image1.jpg" },
-    { name: "Co-Developer 2", role: "Co-Developer", description: "Supporting details for Co-Developer 2", imageUrl: "https://example.com/image2.jpg" },
-    { name: "Co-Developer 3", role: "Co-Developer", description: "Supporting details for Co-Developer 3", imageUrl: "https://example.com/image3.jpg" },
-    { name: "Co-Developer 4", role: "Co-Developer", description: "Supporting details for Co-Developer 4", imageUrl: "https://example.com/image4.jpg" },
+    { name: "Co-Developer 1", role: "Co-Developer", description: "Supporting details for Co-Developer 1", imageUrl: "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/77106652-5e5b-4063-ab1c-312a04246222/82d8c885-ab64-4dcb-8019-94ba100ce366.png" },
+    { name: "Co-Developer 2", role: "Co-Developer", description: "Supporting details for Co-Developer 2", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa9yDM5Oa-NU81jsa3ojJDpxTdc00L2XLh1_gZO_k93tMVDjyTnhj6_6xWU52J7eLz7Js&usqp=CAU" },
+    { name: "Co-Developer 3", role: "Co-Developer", description: "Supporting details for Co-Developer 3", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1OQCLqjPLU8uiEdacHQwHY_aaQbvqfQKRQQ&s" },
+    { name: "Co-Developer 4", role: "Co-Developer", description: "Supporting details for Co-Developer 4", imageUrl: "https://www.shutterstock.com/image-photo/make-me-cartoon-animated-picture-600nw-2484219811.jpg" },
   ];
 
   const renderCard = (member: TeamMember) => {
@@ -105,6 +105,15 @@ const AboutUs: React.FC = () => {
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [coDevelopers.length]);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.body.className = darkMode ? 'dark-theme' : 'light-theme';
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode(prevMode => !prevMode);
+  };
 
 
 
@@ -140,26 +149,27 @@ const AboutUs: React.FC = () => {
           {/* Render Student Team */}
           {studentTeam.map(member => renderCard(member))}
         </div>
-
-
-        <h3>Co-Developers</h3>
-        <div className='co-developers'>
-
-          {/* Render Co-Developers */}
-          {visibleCards.map((index, cardIndex) => (
-            <div
-              className={`co-developer-card ${animationClass[cardIndex]}`}
-              key={coDevelopers[index].name}
-            >
-              <img src={coDevelopers[index].imageUrl} alt={coDevelopers[index].role} />
-              <div>{coDevelopers[index].role}</div>
-              <div style={{ fontSize: '30px', color: '#800080' }}>{coDevelopers[index].name}</div>
-              <p>{coDevelopers[index].description}</p>
-            </div>
-          ))}
-        </div>
+        <label className="theme-toggle-container">
+        <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
+        <span className="theme-toggle-slider"></span>
+      </label>
       </div>
 
+      <h3>Co-Developers</h3>
+      <div className='co-developer-container'>
+        {visibleCards.map((index, cardIndex) => (
+          <div
+            className={`co-developer-card ${animationClass[cardIndex]}`}
+            key={coDevelopers[index].name}
+          >
+            <img src={coDevelopers[index].imageUrl} alt={coDevelopers[index].role} />
+            <div>{coDevelopers[index].role}</div>
+            <div style={{ fontSize: '30px', color: '#800080' }}>{coDevelopers[index].name}</div>
+            <p>{coDevelopers[index].description}</p>
+          </div>
+        ))}
+      </div>
+     
     </>
   );
 }
