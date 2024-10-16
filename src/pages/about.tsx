@@ -85,25 +85,22 @@ const AboutUs: React.FC = () => {
     };
   }, []);
 
-  const [visibleCards, setVisibleCards] = useState<number[]>([0, 1, 2]); // Initially show the first 3 cards
+  const [visibleCards, setVisibleCards] = useState<number[]>([0, 1, 2]);
   const [animationClass, setAnimationClass] = useState<string[]>(["co-developer-enter", "co-developer-enter", "co-developer-enter"]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Calculate the next set of visible cards
       setAnimationClass((prev: any[]) => prev.map((_, index) => (index === 0 ? "co-developer-exit" : (index === 1 ? "co-developer-visible" : "co-developer-enter"))));
 
       setTimeout(() => {
         setVisibleCards((prev: number[]) => {
-          // Move to the next set of cards
           const nextIndex = (prev[0] + 1) % coDevelopers.length;
           return [(nextIndex) % coDevelopers.length, (nextIndex + 1) % coDevelopers.length, (nextIndex + 2) % coDevelopers.length];
         });
-      }, 500); // Wait for the exit animation before changing the visible cards
+      }, 500);
+    }, 3000);
 
-    }, 3000); // Change cards every 3 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, [coDevelopers.length]);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -136,23 +133,20 @@ const AboutUs: React.FC = () => {
         </p>
 
         <div className="team-grid">
-          {/* Render Faculty Members */}
           {facultyMembers.map(member => renderCard(member))}
         </div>
         <h2>Faculty Coordinators</h2>
         <div className="team-grid faculty">
-          {/* Render Faculty Coordinators */}
           {facultyCoordinators.map(member => renderCard(member))}
         </div>
         <h3>Students Coordinators & Developers</h3>
         <div className="team-grid faculty">
-          {/* Render Student Team */}
           {studentTeam.map(member => renderCard(member))}
         </div>
         <label className="theme-toggle-container">
-        <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
-        <span className="theme-toggle-slider"></span>
-      </label>
+          <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
+          <span className="theme-toggle-slider"></span>
+        </label>
       </div>
 
       <h3>Co-Developers</h3>
@@ -169,7 +163,6 @@ const AboutUs: React.FC = () => {
           </div>
         ))}
       </div>
-     
     </>
   );
 }
